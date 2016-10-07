@@ -8,7 +8,7 @@ public class HelloWorldJavaConfig {
 	// Can on be instantiated by XML config, not java config
 	public HelloWorldJavaConfig() {
 		System.out.println("HelloWorldJavaConfig: Public Constuctor.");
-	}	
+	}
 
 	protected HelloWorldJavaConfig(String param) {
 		System.out.println("HelloWorldJavaConfig: Protected Constuctor w/param: " + param);
