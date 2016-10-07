@@ -2,24 +2,25 @@ package AppContext.Scope;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-/**
- * Hello world!
- *
- */
 public class Main 
 {
     public static void main( String[] args )
     {
-    	runXmlApplicationConfig();
-    	runJavaApplicationConfig();
+    	AbstractApplicationContext xml = (AbstractApplicationContext) runXmlApplicationConfig();
+    	AbstractApplicationContext java = (AbstractApplicationContext) runJavaApplicationConfig();
+    	
+    	xml.close();
+    	java.close();
     }
     
-    private static void runXmlApplicationConfig() {
+    private static ApplicationContext runXmlApplicationConfig() {
 
     	//classpath:/ not required if file in default location
-    	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context.xml");
+//    	ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/context.xml");
+    	ApplicationContext context = new FileSystemXmlApplicationContext("C:/Users/courtneym/Desktop/Git/Parent/AppContext.Scope/src/main/resources/context.xml");
     	HelloWorldXml helloWorldWithoutParam = (HelloWorldXml) context.getBean("helloWorldXmlWithoutParam");
     	HelloWorldXml helloWorldWithParam = context.getBean("helloWorldXmlWithParam", HelloWorldXml.class);
     	
@@ -29,12 +30,22 @@ public class Main
     	System.out.println(helloWorldWithoutParam);
     	System.out.println(helloWorldWithParam);
 //    	System.out.println(helloWorld3);
+    	
+    	return context;
     }
     
-    private static void runJavaApplicationConfig() {
+    private static ApplicationContext runJavaApplicationConfig() {
     	ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
 
-    	HelloWorldJavaConfig helloWorldJavaConfig = (HelloWorldJavaConfig) context.getBean("helloWorldJavaConfig");
+    	HelloWorldJavaConfig helloWorldJavaConfig = context.getBean(HelloWorldJavaConfig.class);
     	System.out.println(helloWorldJavaConfig.getPropertyString());
+    	
+    	BeanAnnotations ba1  = (BeanAnnotations) context.getBean("annote");
+    	BeanAnnotations ba2  = (BeanAnnotations) context.getBean("prototypeBeanAnnotation");
+    	
+    	Run run = context.getBean(Run.class);
+    	run.printTypesOfAutoWire();
+    	
+    	return context;
     }
 }

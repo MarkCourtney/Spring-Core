@@ -37,5 +37,6 @@
   
   <modules>
   	<module>AppContext.Scope</module>
+  	<module>Properties.Profiles.Proxying</module>
   </modules>
 </project>

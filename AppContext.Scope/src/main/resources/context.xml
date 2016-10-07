@@ -9,4 +9,8 @@
     	<constructor-arg value="ConstructorString"></constructor-arg>
     	<property name="propertyString" value="PropString"/>
     </bean>
+    
+    <bean id="beanAnnotations" class="AppContext.Scope.BeanAnnotations">
+    	<property name="propTwo" value="BeanAnnotations: propTwo"/>
+    </bean>
 </beans>

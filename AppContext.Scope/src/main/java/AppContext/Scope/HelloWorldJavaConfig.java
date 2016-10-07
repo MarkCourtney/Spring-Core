@@ -5,7 +5,7 @@ public class HelloWorldJavaConfig {
 	private static int instance = 0;
 	private String propertyString;
 	
-	// Can on be instanciated by XML config, not java config
+	// Can on be instantiated by XML config, not java config
 	public HelloWorldJavaConfig() {
 		System.out.println("HelloWorldJavaConfig: Public Constuctor.");
 	}	
